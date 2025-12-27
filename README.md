@@ -91,7 +91,7 @@ docker-compose up -d
 
 Создать админа:
 ```
-docker exec -it matrix_synapse register_new_matrix_user -c /data/homeserver.yaml
+docker exec -it sas_messenger_matrix_synapse register_new_matrix_user -c /data/homeserver.yaml
 ```
 
 ## Что сделать

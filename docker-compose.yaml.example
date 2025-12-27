@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  nginx:
+  nginx-sas-messenger:
     build:
       context: .
       dockerfile: nginx/Dockerfile
@@ -9,9 +9,11 @@ services:
     container_name: sas_messenger_nginx
     env_file:
       - .env
+    # в составе VPS Snake порты комментируются
     ports:
       - 443:443
       - 80:80
+    # в составе VPS Snake сертификаты не нужны и комментируются
     volumes:
       - ./nginx/nginx.conf.template:/etc/nginx/nginx.conf.template
       - {{ CERT_PATH }}/fullchain.pem:/etc/nginx/fullchain.pem
@@ -20,6 +22,8 @@ services:
       - sas-messenger-backend-proxy-network
       - sas-messenger-database-management-network
       - sas-messenger-monitoring
+      # Раскомметировать для работы в составе VPS Snake
+      #- sites-network
     depends_on:
       - synapse
       - element
@@ -143,3 +147,6 @@ networks:
   sas-messenger-backend-proxy-network:
   sas-messenger-database-management-network:
   sas-messenger-monitoring:
+  # Раскомметировать для работы в составе VPS Snake
+  #sites-network:
+  #  external: true
